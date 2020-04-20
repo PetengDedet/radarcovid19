@@ -9,7 +9,8 @@ import OBSPopupContent from './components/OBSPopupContent';
 import ClusterMarkers from './components/ClusterMarkers';
 import Panel from './components/Panel';
 
-const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZ2xhbWZhdGhlciIsImEiOiJjazk4ank3NTQwMno1M2ZwMmN2c21vN2FhIn0.2IaFIkkNhuUPKcHOtyNuCA";
+//Change with your own access token
+const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_ACCESS_TOKEN;
 
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 const rsUrl = "/data/rs_latest.json?" + ((new Date()).getTime() / 1000);
@@ -152,7 +153,7 @@ function App() {
                         <div>
                             <span style={{background: 'red'}}>&nbsp;&nbsp;</span>
                             <input type="checkbox" value="kasus" checked={showCase} onChange={() => setShowCase(!showCase)} />
-                            Kasus
+                            Kasus Positif
                         </div>
                         <div>
                             <span style={{ background: '#2ecc71'}}>
