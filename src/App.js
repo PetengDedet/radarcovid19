@@ -379,6 +379,11 @@ function App() {
                             <a href="https://www.facebook.com/ikhwanmaftuh" target="_blank" rel="noopener noreferrer">Ikhwan Maftuh</a><br />
                         </p>
                         <p>
+                            <b>Map by:</b>
+                            <br/>
+                            Mapbox
+                        </p>
+                        <p>
                             Icons by <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
                         </p>
                         <div style={{ padding: 4, border: '1px solid red', backgroundColor: 'red', background: 'rgba(255, 0, 0, 0.1)', fontStyle: 'italic', fontSize: 10 }}>
