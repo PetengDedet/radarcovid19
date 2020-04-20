@@ -10,7 +10,7 @@ import ClusterMarkers from './components/ClusterMarkers';
 import Panel from './components/Panel';
 
 //Change with your own access token
-const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_ACCESS_TOKEN;
+const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 const rsUrl = "/data/rs_latest.json?" + ((new Date()).getTime() / 1000);
