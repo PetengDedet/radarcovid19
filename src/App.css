@@ -116,6 +116,10 @@
     z-index: 1;
 }
 
+.mapboxgl-popup-content {
+    background-color: rgba(255, 255, 255, 0.93) !important;
+}
+
 .checkbox-group {
     background: white;
     padding-right: 8px;
@@ -131,4 +135,51 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     font-size: small;
+}
+
+.credit-attribution-link-container {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    padding: 4px;
+}
+
+.credit-attribution-link {
+    color: white;
+    background: transparent;
+    border: 1px solid red; 
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 1);
+    padding: 6px;
+}
+
+.credit-attribution-link:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.mobile-panel {
+    background: rgba(255, 255, 255, 0.93);
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 20px;
+    overflow-x: auto;
+    z-index: 2;
+    height: 50%;
+}
+.panel-close-button {
+    position: absolute;
+    right: 18px;
+    top: 3px;
+    background: red;
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+    color: red;
+    color: red;
+    border: 1px solid red;
+    padding: 2px 10px 6px 10px;
+    border-radius: 55%;
+    background: transparent
 }

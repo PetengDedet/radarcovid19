@@ -402,13 +402,8 @@ function App() {
                     </Panel>
                 )
             }
-            <div style={{
-                position: 'absolute',
-                right: 6,
-                bottom: 6,
-                padding: 4
-            }}>
-                <button href="#" style={{color: 'white', background: 'transparent', border: 0, cursor: 'pointer', textDecoration: 'underline'}} onClick={() => setShowCredit(true)}>
+            <div className="credit-attribution-link-container" >
+                <button href="#" className="credit-attribution-link" onClick={() => setShowCredit(true)}>
                     © Credit & Disclaimer!!
                 </button>
             </div>
