@@ -381,7 +381,7 @@ function App() {
                         <p>
                             <b>Map by:</b>
                             <br/>
-                            Mapbox
+                            © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>
                         </p>
                         <p>
                             Icons by <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
@@ -408,8 +408,8 @@ function App() {
                 bottom: 6,
                 padding: 4
             }}>
-                <button href="#" style={{color: 'white', background: 'transparent', border: 0, cursor: 'pointer'}} onClick={() => setShowCredit(true)}>
-                    Credit & Disclaimer
+                <button href="#" style={{color: 'white', background: 'transparent', border: 0, cursor: 'pointer', textDecoration: 'underline'}} onClick={() => setShowCredit(true)}>
+                    © Credit & Disclaimer!!
                 </button>
             </div>
         </>
