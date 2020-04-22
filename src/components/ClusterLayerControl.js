@@ -20,6 +20,9 @@ const ClusterLayerControl = props => {
                     Lokasi Observasi
                 </div>
             </div>
+            <div className="cluster-layer-control-toggle-button" onClick={() => props.onToggleButtonClick(! props.show)}>
+                {props.show ? '<' : '>'}
+            </div>
         </div>
     )
 };

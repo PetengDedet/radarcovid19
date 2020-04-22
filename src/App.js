@@ -55,9 +55,10 @@ function App() {
     const [posPopup, setPosPopup] = useState();
     const [obsPopup, setObsPopup] = useState();
     const [showCase, setShowCase] = useState(true);
-    const [showRs, setShowRs] = useState(true);
-    const [showObs, setShowObs] = useState(true);
+    const [showRs, setShowRs] = useState(false);
+    const [showObs, setShowObs] = useState(false);
     const [showCredit, setShowCredit] = useState(false);
+    const [showLayerControl, setShowLayerControl] = useState(false);
 
     const mapRef = useRef();
 
@@ -130,13 +131,15 @@ function App() {
                 </div>
 
                 <ClusterLayerControl
-                    className={`cluster-layer-control-container ${(rsPopup || posPopup || obsPopup) && 'semi-transparent'}`}
+                    className={`cluster-layer-control-container ${(rsPopup || posPopup || obsPopup) && 'semi-transparent'} ${showLayerControl && 'active'}`}
                     showCase={showCase}
                     showRs={showRs}
                     showObs={showObs}
                     onShowCaseChange={() => setShowCase(!showCase)}
                     onShowRsChange={() => setShowRs(!showRs)}
                     onShowObsChange={() => setShowObs(!showObs)}
+                    show={showLayerControl}
+                    onToggleButtonClick={setShowLayerControl}
                 />
 
                 {/* RS */}
