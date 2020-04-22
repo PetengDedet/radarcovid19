@@ -8,6 +8,7 @@ import POSPopupContent from './components/POSPopupContent';
 import OBSPopupContent from './components/OBSPopupContent';
 import ClusterMarkers from './components/ClusterMarkers';
 import Panel from './components/Panel';
+import ClusterLayerControl from "./components/ClusterLayerControl";
 
 //Change with your own access token
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -145,32 +146,19 @@ function App() {
                 ref={mapRef}
             >
 
-                <div style={{ position: 'absolute', zIndex: 2, right: 10, top: 10, opacity: rsPopup || posPopup || obsPopup ? 0.2 : 1  }}>
+                <div className={`navigation-control-container ${(rsPopup || posPopup || obsPopup) && 'semi-transparent'}`}>
                     <NavigationControl />
                 </div>
-                <div style={{position: 'absolute',zIndex: 2, left: 10, top: 10, opacity: rsPopup || posPopup || obsPopup ? 0.2 : 1 }}>
-                    <div className="checkbox-group">
-                        <div>
-                            <span style={{background: 'red'}}>&nbsp;&nbsp;</span>
-                            <input type="checkbox" value="kasus" checked={showCase} onChange={() => setShowCase(!showCase)} />
-                            Kasus Positif
-                        </div>
-                        <div>
-                            <span style={{ background: '#2ecc71'}}>
-                                &nbsp;&nbsp;
-                            </span>
-                            <input type="checkbox" value="rs" checked={showRs} onChange={() => setShowRs(!showRs)} />
-                            Rumah Sakit
-                        </div>
-                        <div>
-                            <span style={{background: 'orange'}}>
-                                &nbsp;&nbsp;
-                            </span>
-                            <input type="checkbox" value="observasi" checked={showObs} onChange={() => setShowObs(!showObs)} />
-                            Observasi
-                        </div>
-                    </div>
-                </div>
+
+                <ClusterLayerControl
+                    className={`cluster-layer-control-container ${(rsPopup || posPopup || obsPopup) && 'semi-transparent'}`}
+                    showCase={showCase}
+                    showRs={showRs}
+                    showObs={showObs}
+                    onShowCaseChange={() => setShowCase(!showCase)}
+                    onShowRsChange={() => setShowRs(!showRs)}
+                    onShowObsChange={() => setShowObs(!showObs)}
+                />
 
                 {/* RS */}
 

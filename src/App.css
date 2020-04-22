@@ -180,3 +180,22 @@
     border-radius: 55%;
     background: transparent;
 }
+
+.cluster-layer-control-container {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    top: 10px;
+    opacity: 1;
+}
+
+.semi-transparent {
+    opacity: 0.2;
+}
+
+.navigation-control-container {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+}
