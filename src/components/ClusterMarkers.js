@@ -29,7 +29,7 @@ const ClusterMarkers = (props) => {
                             height: `${10 + (pointCount / pointsLength) * 50}px`,
                         }}
                         onClick={() => {
-                            onClusterClick(cluster)
+                            onClusterClick(cluster);
                         }}
                     >
                         {pointCount}
@@ -49,7 +49,7 @@ const ClusterMarkers = (props) => {
                 <button
                     className={markerContentClassName}
                     onClick={() => {
-                        onMarkerClick(cluster)
+                        onMarkerClick(cluster);
                     }}
                 >
                     <img src={markerIcon} alt="-" />
@@ -57,6 +57,6 @@ const ClusterMarkers = (props) => {
             </Marker>
         )
     })
-}
+};
 
 export default ClusterMarkers;

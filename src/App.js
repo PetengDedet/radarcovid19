@@ -29,28 +29,28 @@ function App() {
         height: "100vh",
         zoom: 6
     });
-    const [rsPopup, setRsPopup] = useState()
-    const [posPopup, setPosPopup] = useState()
-    const [obsPopup, setObsPopup] = useState()
-    const [showCase, setShowCase] = useState(true)
-    const [showRs, setShowRs] = useState(true)
-    const [showObs, setShowObs] = useState(true)
-    const [showCredit, setShowCredit] = useState(false)
+    const [rsPopup, setRsPopup] = useState();
+    const [posPopup, setPosPopup] = useState();
+    const [obsPopup, setObsPopup] = useState();
+    const [showCase, setShowCase] = useState(true);
+    const [showRs, setShowRs] = useState(true);
+    const [showObs, setShowObs] = useState(true);
+    const [showCredit, setShowCredit] = useState(false);
 
-    const mapRef = useRef()
+    const mapRef = useRef();
 
     // Load and prepare data
-    const rsReq = useSwr(rsUrl, fetcher)
-    const posReq = useSwr(posUrl, fetcher)
-    const obsReq = useSwr(obsUrl, fetcher)
+    const rsReq = useSwr(rsUrl, fetcher);
+    const posReq = useSwr(posUrl, fetcher);
+    const obsReq = useSwr(obsUrl, fetcher);
     const rs_data = rsReq.data && !rsReq.error ? rsReq.data.data.slice(0, 2000) : [];
     const pos_data = posReq.data && !posReq.error ? posReq.data.data.slice(0, 2000) : [];
     const obs_data = obsReq.data && !obsReq.error ? obsReq.data.data.slice(0, 2000) : [];
     
     
     const rsPoints = rs_data.map(rs => {
-        let lat = parseFloat(rs.lat.replace(",", "."))
-        let lng = parseFloat(rs.lng.replace(",", "."))
+        let lat = parseFloat(rs.lat.replace(",", "."));
+        let lng = parseFloat(rs.lng.replace(",", "."));
 
         return {
             type: "Feature",
@@ -63,11 +63,11 @@ function App() {
                 coordinates: [lng, lat]
             }
         }
-    })
+    });
 
     const posPoints = pos_data.map(pos => {
-        let lat = parseFloat(pos.lat.replace(",", "."))
-        let lng = parseFloat(pos.lng.replace(",", "."))
+        let lat = parseFloat(pos.lat.replace(",", "."));
+        let lng = parseFloat(pos.lng.replace(",", "."));
 
         return {
             type: "Feature",
@@ -80,11 +80,11 @@ function App() {
                 coordinates: [lng, lat]
             }
         }
-    })
+    });
 
     const obsPoints = obs_data.map(obs => {
-        let lat = parseFloat(obs.lat.replace(",", "."))
-        let lng = parseFloat(obs.lng.replace(",", "."))
+        let lat = parseFloat(obs.lat.replace(",", "."));
+        let lng = parseFloat(obs.lng.replace(",", "."));
 
         return {
             type: "Feature",
@@ -97,7 +97,7 @@ function App() {
                 coordinates: [lng, lat]
             }
         }
-    })
+    });
 
     // Get map bounds
     const bounds = mapRef.current 
@@ -106,28 +106,28 @@ function App() {
             .getBounds()
             .toArray()
             .flat() 
-        : null
+        : null;
 
     const rsClusters = useSupercluster({
         points: rsPoints,
         zoom: viewport.zoom,
         bounds,
         options: { radius: 100, maxZoom: 20 }
-    })
+    });
 
     const posClusters = useSupercluster({
         points: posPoints,
         zoom: viewport.zoom,
         bounds,
         options: { radius: 150, maxZoom: 50 }
-    })
+    });
 
     const obsClusters = useSupercluster({
         points: obsPoints,
         zoom: viewport.zoom,
         bounds,
         options: { radius: 75, maxZoom: 20 }
-    })
+    });
 
     return (
         <>
@@ -191,16 +191,16 @@ function App() {
                             zoom: expansionZoom,
                             transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
                             transitionDuration: "auto"
-                        })
+                        });
 
-                        setPosPopup(null)
-                        setObsPopup(null)
-                        setRsPopup(null)
+                        setPosPopup(null);
+                        setObsPopup(null);
+                        setRsPopup(null);
                     }}
                     onMarkerClick={(cluster) => {
-                        setObsPopup(null)
-                        setPosPopup(null)
-                        setRsPopup(cluster)
+                        setObsPopup(null);
+                        setPosPopup(null);
+                        setRsPopup(cluster);
                     }}
                     markerIcon="/icons/rs.png"
                     clusterContentClassName="rs-cluster-marker"
@@ -214,7 +214,7 @@ function App() {
                         closeButton={true}
                         closeOnClick={false}
                         onClose={() => {
-                            setRsPopup(null)
+                            setRsPopup(null);
                         }}
                         anchor="top" >
 
@@ -240,16 +240,16 @@ function App() {
                             zoom: expansionZoom,
                             transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
                             transitionDuration: "auto"
-                        })
+                        });
 
-                        setPosPopup(null)
-                        setObsPopup(null)
-                        setRsPopup(null)
+                        setPosPopup(null);
+                        setObsPopup(null);
+                        setRsPopup(null);
                     }}
                     onMarkerClick={(cluster) => {
-                        setObsPopup(null)
-                        setPosPopup(cluster)
-                        setRsPopup(null)
+                        setObsPopup(null);
+                        setPosPopup(cluster);
+                        setRsPopup(null);
                     }}
                     markerIcon="/icons/vrs.png"
                     clusterContentClassName="pos-cluster-marker"
@@ -263,7 +263,7 @@ function App() {
                         closeButton={true}
                         closeOnClick={false}
                         onClose={() => {
-                            setPosPopup(null)
+                            setPosPopup(null);
                         }}
                         anchor="top" >
 
@@ -290,16 +290,16 @@ function App() {
                             zoom: expansionZoom,
                             transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
                             transitionDuration: "auto"
-                        })
+                        });
 
-                        setPosPopup(null)
-                        setObsPopup(null)
-                        setRsPopup(null)
+                        setPosPopup(null);
+                        setObsPopup(null);
+                        setRsPopup(null);
                     }}
                     onMarkerClick={(cluster) => {
-                        setObsPopup(cluster)
-                        setPosPopup(null)
-                        setRsPopup(null)
+                        setObsPopup(cluster);
+                        setPosPopup(null);
+                        setRsPopup(null);
                     }}
                     markerIcon="/icons/obs.png"
                     clusterContentClassName="obs-cluster-marker"

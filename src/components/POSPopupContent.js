@@ -63,6 +63,6 @@ const POSPopupContent = ({ object }) => (
                 <br />*Titik bersifat dimana domisili kasus positif Covid-19. Sehingga baik kasus sembuh maupun meninggal tetap di tampilkan, agar masyarakat tetap waspada.</em></small></p>
         </div>
     </div>
-)
+);
 
-export default POSPopupContent
+export default POSPopupContent;

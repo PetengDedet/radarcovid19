@@ -58,6 +58,6 @@ const OBSPopupContent = ({ object }) => (
         </div>
         {/* <pre>{JSON.stringify(object, undefined, 2)}</pre> */}
     </div>
-)
+);
 
 export default OBSPopupContent;
