@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import ReactMapGL, { NavigationControl, FlyToInterpolator, Popup } from 'react-map-gl'
+import ReactMapGL, { NavigationControl, Popup } from 'react-map-gl'
 import useSwr from 'swr';
 import './App.css';
 import useSupercluster from 'use-supercluster';
@@ -131,6 +131,12 @@ function App() {
         options: { radius: 75, maxZoom: 20 }
     });
 
+    const clearAllPopup = () => {
+        setObsPopup(null);
+        setRsPopup(null);
+        setPosPopup(null);
+    };
+
     return (
         <>
             <ReactMapGL
@@ -167,25 +173,10 @@ function App() {
                 <ClusterMarkers 
                     clusters={rsClusters}
                     pointsLength={rsPoints.length}
-                    onClusterClick={(cluster) => {
-                        const expansionZoom = Math.min(
-                            rsClusters.supercluster.getClusterExpansionZoom(cluster.id),
-                            20
-                        );
-
-                        setViewport({
-                            ...viewport,
-                            latitude: cluster.geometry.coordinates[1],
-                            longitude: cluster.geometry.coordinates[0],
-                            zoom: expansionZoom,
-                            transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
-                            transitionDuration: "auto"
-                        });
-
-                        setPosPopup(null);
-                        setObsPopup(null);
-                        setRsPopup(null);
-                    }}
+                    clearPopup={clearAllPopup}
+                    maxZoom={20}
+                    setViewport={setViewport}
+                    viewport={viewport}
                     onMarkerClick={(cluster) => {
                         setObsPopup(null);
                         setPosPopup(null);
@@ -216,25 +207,10 @@ function App() {
                 <ClusterMarkers
                     clusters={posClusters}
                     pointsLength={posPoints.length}
-                    onClusterClick={(cluster) => {
-                        const expansionZoom = Math.min(
-                            posClusters.supercluster.getClusterExpansionZoom(cluster.id),
-                            20
-                        );
-
-                        setViewport({
-                            ...viewport,
-                            latitude: cluster.geometry.coordinates[1],
-                            longitude: cluster.geometry.coordinates[0],
-                            zoom: expansionZoom,
-                            transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
-                            transitionDuration: "auto"
-                        });
-
-                        setPosPopup(null);
-                        setObsPopup(null);
-                        setRsPopup(null);
-                    }}
+                    clearPopup={clearAllPopup}
+                    maxZoom={20}
+                    setViewport={setViewport}
+                    viewport={viewport}
                     onMarkerClick={(cluster) => {
                         setObsPopup(null);
                         setPosPopup(cluster);
@@ -266,25 +242,10 @@ function App() {
                 <ClusterMarkers
                     clusters={obsClusters}
                     pointsLength={obsPoints.length}
-                    onClusterClick={(cluster) => {
-                        const expansionZoom = Math.min(
-                            obsClusters.supercluster.getClusterExpansionZoom(cluster.id),
-                            20
-                        );
-
-                        setViewport({
-                            ...viewport,
-                            latitude: cluster.geometry.coordinates[1],
-                            longitude: cluster.geometry.coordinates[0],
-                            zoom: expansionZoom,
-                            transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
-                            transitionDuration: "auto"
-                        });
-
-                        setPosPopup(null);
-                        setObsPopup(null);
-                        setRsPopup(null);
-                    }}
+                    clearPopup={clearAllPopup}
+                    maxZoom={20}
+                    setViewport={setViewport}
+                    viewport={viewport}
                     onMarkerClick={(cluster) => {
                         setObsPopup(cluster);
                         setPosPopup(null);

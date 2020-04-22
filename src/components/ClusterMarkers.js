@@ -1,12 +1,13 @@
 import React from 'react';
-import { Marker } from 'react-map-gl';
+import {FlyToInterpolator, Marker} from 'react-map-gl';
 
 
 const ClusterMarkers = (props) => {
     const {
-        clusters, pointsLength,
-        onClusterClick, onMarkerClick,
-        markerIcon, clusterContentClassName, markerContentClassName
+        clusters, pointsLength, onMarkerClick,
+        markerIcon, clusterContentClassName, markerContentClassName,
+        clearPopup, maxZoom, setViewport,
+        viewport
     } = props;
 
     return clusters.clusters.map(cluster => {
@@ -28,8 +29,23 @@ const ClusterMarkers = (props) => {
                             width: `${10 + (pointCount / pointsLength) * 50}px`,
                             height: `${10 + (pointCount / pointsLength) * 50}px`,
                         }}
+
                         onClick={() => {
-                            onClusterClick(cluster);
+                            const expansionZoom = Math.min(
+                                clusters.supercluster.getClusterExpansionZoom(cluster.id),
+                                maxZoom
+                            );
+
+                            setViewport({
+                                ...viewport,
+                                latitude: cluster.geometry.coordinates[1],
+                                longitude: cluster.geometry.coordinates[0],
+                                zoom: expansionZoom,
+                                transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
+                                transitionDuration: "auto"
+                            });
+
+                            clearPopup();
                         }}
                     >
                         {pointCount}
