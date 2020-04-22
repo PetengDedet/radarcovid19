@@ -21,6 +21,26 @@ const obsUrl = "/data/do_latest.json?" + ((new Date()).getTime() / 1000);
 
 const isMobile = window.innerWidth <= 500;
 
+//Convert JSON Data to Geojson Point
+const dataToFeaturePoints = data => {
+    return data.map(d => {
+        let lat = parseFloat(d.lat.replace(",", "."));
+        let lng = parseFloat(d.lng.replace(",", "."));
+
+        return {
+            type: "Feature",
+            properties: {
+                cluster: false,
+                ...d
+            },
+            geometry: {
+                type: "Point",
+                coordinates: [lng, lat]
+            }
+        }
+    });
+};
+
 function App() {
     
     // Set the map
@@ -48,58 +68,10 @@ function App() {
     const rs_data = rsReq.data && !rsReq.error ? rsReq.data.data.slice(0, 2000) : [];
     const pos_data = posReq.data && !posReq.error ? posReq.data.data.slice(0, 2000) : [];
     const obs_data = obsReq.data && !obsReq.error ? obsReq.data.data.slice(0, 2000) : [];
-    
-    
-    const rsPoints = rs_data.map(rs => {
-        let lat = parseFloat(rs.lat.replace(",", "."));
-        let lng = parseFloat(rs.lng.replace(",", "."));
 
-        return {
-            type: "Feature",
-            properties: {
-                cluster: false,
-                ...rs
-            },
-            geometry: {
-                type: "Point",
-                coordinates: [lng, lat]
-            }
-        }
-    });
-
-    const posPoints = pos_data.map(pos => {
-        let lat = parseFloat(pos.lat.replace(",", "."));
-        let lng = parseFloat(pos.lng.replace(",", "."));
-
-        return {
-            type: "Feature",
-            properties: {
-                cluster: false,
-                ...pos
-            },
-            geometry: {
-                type: "Point",
-                coordinates: [lng, lat]
-            }
-        }
-    });
-
-    const obsPoints = obs_data.map(obs => {
-        let lat = parseFloat(obs.lat.replace(",", "."));
-        let lng = parseFloat(obs.lng.replace(",", "."));
-
-        return {
-            type: "Feature",
-            properties: {
-                cluster: false,
-                ...obs
-            },
-            geometry: {
-                type: "Point",
-                coordinates: [lng, lat]
-            }
-        }
-    });
+    const rsPoints = dataToFeaturePoints(rs_data);
+    const posPoints = dataToFeaturePoints(pos_data);
+    const obsPoints = dataToFeaturePoints(obs_data);
 
     // Get map bounds
     const bounds = mapRef.current 
@@ -114,21 +86,21 @@ function App() {
         points: rsPoints,
         zoom: viewport.zoom,
         bounds,
-        options: { radius: 100, maxZoom: 20 }
+        options: { radius: 50, maxZoom: 20 }
     });
 
     const posClusters = useSupercluster({
         points: posPoints,
         zoom: viewport.zoom,
         bounds,
-        options: { radius: 150, maxZoom: 50 }
+        options: { radius: 50, maxZoom: 24 }
     });
 
     const obsClusters = useSupercluster({
         points: obsPoints,
         zoom: viewport.zoom,
         bounds,
-        options: { radius: 75, maxZoom: 20 }
+        options: { radius: 50, maxZoom: 20 }
     });
 
     const clearAllPopup = () => {
@@ -272,18 +244,7 @@ function App() {
                 }
 
                 { ((!rsReq.data && !rsReq.error) || (!posReq.data && !posReq.error) || (!obsReq.data && !obsReq.error) ) &&
-                    <div style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        height: 40,
-                        width: '100%',
-                        zIndex: 2,
-                        textAlign: 'center',
-                        background: 'white',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                    }}>
+                    <div className="error-and-loading-container">
                         {  rsReq.error ? 'Error loading Data Rumah Sakit :( ' : 
                             posReq.error ? 'Error loading Data Kasus :( ' :
                                 obsReq.error ? 'Error loading Data Observasi :( ' :
@@ -293,7 +254,6 @@ function App() {
 
                 
             </ReactMapGL>
-
 
             {
                 isMobile && rsPopup && showRs && <Panel onClose={() => setRsPopup(null)}>
