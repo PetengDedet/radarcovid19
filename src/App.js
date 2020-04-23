@@ -58,7 +58,7 @@ function App() {
     const [showRs, setShowRs] = useState(false);
     const [showObs, setShowObs] = useState(false);
     const [showCredit, setShowCredit] = useState(false);
-    const [showLayerControl, setShowLayerControl] = useState(false);
+    const [showLayerControl, setShowLayerControl] = useState(true);
 
     const mapRef = useRef();
 
