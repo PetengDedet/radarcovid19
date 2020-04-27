@@ -23,7 +23,9 @@ const isMobile = window.innerWidth <= 500;
 
 //Convert JSON Data to Geojson Point
 const dataToFeaturePoints = data => {
-    return data.map(d => {
+    let dt = data.filter(d => d.lat.length > 0 || d.lng.length > 0)
+
+    return dt.map(d => {
         let lat = parseFloat(d.lat.replace(",", "."));
         let lng = parseFloat(d.lng.replace(",", "."));
 
