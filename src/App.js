@@ -61,6 +61,7 @@ function App() {
     const [showObs, setShowObs] = useState(false);
     const [showCredit, setShowCredit] = useState(false);
     const [showLayerControl, setShowLayerControl] = useState(true);
+    // const [latestUpdate, setLatestUpdate] = useState('-');
 
     const mapRef = useRef();
 
@@ -71,6 +72,8 @@ function App() {
     const rs_data = rsReq.data && !rsReq.error ? rsReq.data.data.slice(0, 2000) : [];
     const pos_data = posReq.data && !posReq.error ? posReq.data.data.slice(0, 2000) : [];
     const obs_data = obsReq.data && !obsReq.error ? obsReq.data.data.slice(0, 2000) : [];
+
+    const latestData = rsReq.data && !rsReq.error ? rsReq.data.date : '-';
 
     const rsPoints = dataToFeaturePoints(rs_data);
     const posPoints = dataToFeaturePoints(pos_data);
@@ -142,6 +145,7 @@ function App() {
                     onShowObsChange={() => setShowObs(!showObs)}
                     show={showLayerControl}
                     onToggleButtonClick={setShowLayerControl}
+                    latestData={latestData}
                 />
 
                 {/* RS */}

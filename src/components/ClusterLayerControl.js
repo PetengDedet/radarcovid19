@@ -19,6 +19,10 @@ const ClusterLayerControl = props => {
                     <input type="checkbox" value="observasi" checked={props.showObs} onChange={props.onShowObsChange} />
                     Lokasi Observasi
                 </div>
+
+                <div className="update-label">
+                    <em>*Update data pada: <br />&nbsp;&nbsp;<span>{props.latestData}</span></em>
+                </div>
                 
             </div>
             <div className="cluster-layer-control-toggle-button" onClick={() => props.onToggleButtonClick(! props.show)}>
